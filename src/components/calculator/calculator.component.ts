@@ -12,8 +12,10 @@ export class CalculatorComponent implements OnInit {
   question: string = '0';
   result: string = '0';
   operator: string | null = null;
-
+  log: string[] = [];
   constructor() {}
+  numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+  operators = ['+', '-', '*', '/'];
 
   ngOnInit() {}
 
@@ -25,15 +27,19 @@ export class CalculatorComponent implements OnInit {
       this.question += num;
     }
   }
-
+  logCalculation(entry: string): void {
+    this.log.unshift(entry); // Add to log (newest first)
+    if (this.log.length > 10) {
+      this.log.pop(); // Keep only the last 10 entries
+    }
+  }
   // Set the operator and handle automatic calculation
   setOperator(operator: string): void {
     if (this.question === '0' || this.question === 'Error') {
       return; // Prevent setting an operator if no number is entered
     }
-
     const lastChar = this.question.slice(-1);
-    console.log('lastChar', lastChar);
+    console.log(lastChar);
 
     // Check if the last character is an operator
     if (['+', '-', '*', '/'].includes(lastChar)) {

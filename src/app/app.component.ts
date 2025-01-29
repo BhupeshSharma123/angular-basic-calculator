@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
 import { CalculatorComponent } from '../components/calculator/calculator.component';
 
 @Component({
